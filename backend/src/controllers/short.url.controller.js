@@ -10,7 +10,7 @@ export const CreateShortUrlController =  async (req, res) => {
     res.status(201).json({
       ShortUrl,
       success: true,
-    });
+    })
   } catch (error) {
     res.status(400).json({
       message: "Something Went Wrong",

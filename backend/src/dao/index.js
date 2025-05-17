@@ -1,5 +1,5 @@
-import { CreateNewUrlDAO } from "./mongo.db.dao.js";
+import { SaveShortUrl, GetUrlFromShort } from "./mongo.db.dao.js";
 
 
 
-export {CreateNewUrlDAO as CreateUrlDataBase}
+export {SaveShortUrl,GetUrlFromShort}
