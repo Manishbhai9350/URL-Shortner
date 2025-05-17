@@ -14,6 +14,6 @@ export const SaveShortUrl = async (full,short,userId) => {
 
 
 export const GetUrlFromShort = async (short) => {
-  const url = await UrlModel.findOne({ short });
+  const url = await UrlModel.findOneAndUpdate({ short },{$inc:{click:1}});
   return url
 }
