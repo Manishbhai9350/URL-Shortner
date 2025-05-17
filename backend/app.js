@@ -4,6 +4,7 @@ import { ConnectDB } from "./src/config/mongo.db.config.js";
 import Morgan from "morgan";
 import {ShortUrlRouter} from './src/routes/short.url.route.js'
 import { RedirectFromShortUrl } from "./src/services/short.url.service.js";
+import {ErrorHandler} from './src/utils/ErrorHandler.js'
 
 const app = express();
 
@@ -13,6 +14,7 @@ ConnectDB();
 app.use(Morgan("dev"));
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
+app.use(ErrorHandler)
 
 app.use("/api/url",ShortUrlRouter);
 app.get("/:short",RedirectFromShortUrl);
