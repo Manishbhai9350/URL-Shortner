@@ -9,6 +9,32 @@
 
 @custom-variant dark (&:where(.dark,.dark *));
 
+*{ 
+padding:0; 
+margin:0;
+box-sizing:border-box;
+}
+html , body {
+width:100svw;
+height:100svh;
+overflow: hidden;
+}
+
+main {
+    width: 100svw;
+    height: 100svh;
+    overflow: hidden;
+    padding-top: 100px;
+    gap: 15px;
+}
+
+@media (max-width:800px) {
+    main {
+        padding-top: 150px!important;
+        gap: 30px;
+    }
+}
+
 .bg-gradient-bg {
    background-image: linear-gradient(to bottom, #0b0b16, #101315);
 }

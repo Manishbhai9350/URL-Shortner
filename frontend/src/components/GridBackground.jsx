@@ -32,12 +32,12 @@ const GridBackground = () => {
           <div
             key={i}
             style={{
-              width: "1px",
-              height: "1px",
+              width: "2px",
+              height: "2px",
               borderRadius: "9999px",
-               boxShadow: "0 0 6px 3px rgba(255, 255, 255, 0.1)",
+               boxShadow: "0 0 6px 3px rgba(40, 40, 217, 0.379)",
             }}
-            className="bg-white opacity-20"
+            className="bg-blue-500 opacity-20"
           />
         ))}
       </div>
