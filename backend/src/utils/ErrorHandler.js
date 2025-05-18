@@ -35,4 +35,4 @@ class ConflictError extends ApiError {
 
 
 
-export {ApiError,ErrorHandler}
+export {ApiError,ErrorHandler,ConflictError}

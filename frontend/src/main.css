@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@theme {
+    --color-dot:#1A1A1A;
+    --color-dark1:#0f1316;
+    --color-dark3:#1d1f27;
+}
+
+
+@custom-variant dark (&:where(.dark,.dark *));
+
+.bg-gradient-bg {
+   background-image: linear-gradient(to bottom, #0b0b16, #101315);
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
