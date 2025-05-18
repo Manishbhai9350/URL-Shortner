@@ -12,14 +12,6 @@ function App() {
     shortUrl:'',
     shortFull:''
   })
-
-  useEffect(() => {
-    
-  
-    return () => {
-      
-    }
-  }, [])
   
 
     return (

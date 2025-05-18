@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import AxiosUtil from "../utils/axios.util";
 
 const UrlForm = ({ Data, setData }) => {
   const [loading, setLoading] = useState(false);
@@ -16,16 +17,16 @@ const UrlForm = ({ Data, setData }) => {
       setLoading(true);
       setError(null);
 
-      const response = await axios.post("http://localhost:3000/api/url", {
+      const response = await AxiosUtil.post(`api/url`, {
         url: Data.fullUrl,
       });
 
       if (response.data.success) {
-        const shortUrl = `http://localhost:3000/${response.data.ShortUrl.short}`;
+        const RedirectUrl = response.data.ShortUrl.redirect;
         setData((prev) => ({
           ...prev,
           shortUrl: response.data.ShortUrl.short,
-          shortFull: shortUrl,
+          shortFull: RedirectUrl,
         }));
       } else {
         setError("Failed to shorten URL");
@@ -38,7 +39,7 @@ const UrlForm = ({ Data, setData }) => {
   };
 
   const copyToClipboard = () => {
-    if (!Data.shortFull) return;
+    if (!Data.shortFull || copySuccess) return;
 
     navigator.clipboard
       .writeText(Data.shortFull)
@@ -52,8 +53,8 @@ const UrlForm = ({ Data, setData }) => {
   };
 
   return (
-    <div className="Url-Form z-20 bg-dark2 relative sm:gap-4 gap-4 flex flex-col w-[95%] lg:w-[70%] rounded-md p-4">
-      <div className="input rounded-md w-full p-2 px-4 h-12 flex bg-dark3 text-white">
+    <div className="Url-Form z-20 bg-dark2 relative sm:gap-4 gap-4 flex flex-col w-[95%] lg:w-[70%] rounded-sm p-4">
+      <div className="input rounded-sm w-full p-2 px-4 h-12 flex bg-dark3 text-white">
         <input
           value={Data.fullUrl}
           onInput={(e) =>
@@ -69,7 +70,7 @@ const UrlForm = ({ Data, setData }) => {
       </div>
 
       <div
-        className={`button cursor-pointer rounded-md w-full h-12 ${
+        className={`button cursor-pointer rounded-sm w-full h-12 ${
           loading ? "bg-blue-400" : "bg-blue-500"
         } transition-colors duration-150`}
         onClick={handleShorten}
@@ -89,7 +90,7 @@ const UrlForm = ({ Data, setData }) => {
       {Data.shortFull && (
         <div className="result-container mt-4 flex flex-col gap-2">
           <div className="flex flex-col items-center gap-2">
-            <div style={{paddingInline:10}} className="input rounded-md w-full p-2 h-12 flex bg-dark3 text-white">
+            <div style={{paddingInline:10}} className="input rounded-sm w-full p-2 h-12 flex bg-dark3 text-white">
               <input
                 value={Data.shortFull}
                 readOnly
@@ -101,7 +102,7 @@ const UrlForm = ({ Data, setData }) => {
 
             <button
               onClick={copyToClipboard}
-              className={`copy-button cursor-pointer p-2 h-12 text-2xl w-full rounded-md transition-colors duration-150 ${
+              className={`copy-button cursor-pointer p-2 h-12 text-2xl w-full rounded-sm transition-colors duration-150 ${
                 copySuccess ? "bg-green-500" : "bg-blue-500"
               }`}
             >

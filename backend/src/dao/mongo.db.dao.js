@@ -6,6 +6,7 @@ export const SaveShortUrl = async (full,short,userId) => {
     const ShortUrl = new UrlModel({
       full,
       short,
+      redirect:process.env.SERVER_URL+short
     });
     if(userId) {
       ShortUrl.user = userId
@@ -13,6 +14,7 @@ export const SaveShortUrl = async (full,short,userId) => {
     await ShortUrl.save();
     return ShortUrl
   } catch (error) {
+    console.log(error)
     throw new ConflictError(error.message)
   }
 }
