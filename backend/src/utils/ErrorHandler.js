@@ -33,6 +33,13 @@ class ConflictError extends ApiError {
   }
 }
 
+class UnauthorizedError extends ApiError {
+  constructor(message = 'Unauthorized') {
+    super(401, message);
+  }
+}
 
 
-export {ApiError,ErrorHandler,ConflictError}
+
+
+export {ApiError,ErrorHandler,ConflictError,UnauthorizedError}

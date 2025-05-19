@@ -1,12 +1,14 @@
 import UrlModel from "../models/url.model.js";
+import UserModel from '../models/user.model.js';
+import { GetRedirectUrl, NormalizeToHttps } from "../utils/app.helper.js";
 import { ConflictError } from "../utils/ErrorHandler.js";
 
 export const SaveShortUrl = async (full,short,userId) => {
   try {
     const ShortUrl = new UrlModel({
-      full,
+      full:NormalizeToHttps(GetRedirectUrl({slug:short})),
       short,
-      redirect:process.env.SERVER_URL+short
+      redirect:NormalizeToHttps(full)
     });
     if(userId) {
       ShortUrl.user = userId
@@ -27,4 +29,33 @@ export const GetUrlFromShort = async (short) => {
   } catch (error) {
     throw new ConflictError(error.message)
   }
+}
+
+
+
+export const RegisterUser = async ({username,email,password}) => {
+  const ExistingUser = await UserModel.findOne({email})
+
+  if(ExistingUser) {
+    throw new ConflictError('Wrong Credentials')
+  }
+
+  const User = await UserModel.create({email,username,password})
+
+  if(!User) {
+    throw new Error('Something Went Wrong')
+  }
+
+  return User
+}
+
+
+export const GetUserById = async (id) => {
+  const User = await UserModel.findById(id)
+  return User
+}
+
+export const GetUserByEmail = async (email) => {
+  const User = await UserModel.findOne({email})
+  return User
 }

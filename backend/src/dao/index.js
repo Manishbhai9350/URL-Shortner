@@ -1,5 +1,5 @@
-import { SaveShortUrl, GetUrlFromShort } from "./mongo.db.dao.js";
+import { SaveShortUrl, GetUrlFromShort, RegisterUser } from "./mongo.db.dao.js";
 
 
 
-export {SaveShortUrl,GetUrlFromShort}
+export {SaveShortUrl,GetUrlFromShort,RegisterUser}
