@@ -14,12 +14,17 @@ const app = express();
 dotenv.configDotenv();
 ConnectDB();
 
-app.use(cors());
+app.use(cors({
+  origin: process.env.CLIENT_URL,
+  credentials: true
+}));
 app.use(cookieParser())
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
 app.use(ErrorHandler)
-app.use(Morgan("dev"));
+if(process.env.ENV == 'development') {
+  app.use(Morgan("dev"));
+}
 
 app.use('/auth',AuthRoutes)
 app.use("/api/url",ShortUrlRouter);

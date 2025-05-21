@@ -40,3 +40,8 @@ export const LoginUserController = async (req,res) => {
     })
 
 }
+
+
+export const LogOutController = async (req, res) => {
+  res.cookie('access-token', '',cookieOptions).status(200).json({ message: 'Logged out successfully',success:true });
+};
