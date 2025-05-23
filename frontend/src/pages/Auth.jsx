@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux'
 import GridBackground from "../components/GridBackground";
 import AxiosInstance from "../utils/axios.util";
+import {login,logout} from '../store/slices/auth.slice'
+import {useNavigate} from '@tanstack/react-router'
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -12,6 +15,10 @@ const Auth = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+
+  const auth = useSelector(state => state.auth)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     setFormData({
@@ -40,7 +47,9 @@ const Auth = () => {
       });
 
       if (response.data.success) {
-        setSuccess(isLogin ? "Login successful!" : "Registration successful!");
+        dispatch(login(response.data.user))
+        navigate({to:'/dashboard'})
+        setSuccess('');
         // You could redirect the user or update app state here
       }
     } catch (err) {
