@@ -71,7 +71,7 @@ const Auth = () => {
             <div className="input-group">
               <label
                 htmlFor="username"
-                className="block text-sm font-medium mb-1"
+                className="block text-sm font-medium mb-2"
               >
                 Username
               </label>
@@ -81,7 +81,7 @@ const Auth = () => {
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
-                style={{ paddingInline: 6 }}
+                style={{ paddingInline: 16 }}
                 className="w-full h-12 px-4 rounded-sm bg-dark3 text-white border-none outline-none text-lg"
                 placeholder="johndoe"
                 required={!isLogin}
@@ -90,7 +90,7 @@ const Auth = () => {
           )}
 
           <div className="input-group">
-            <label htmlFor="email" className="block text-sm font-medium mb-1">
+            <label htmlFor="email" className="block text-sm font-medium mb-2">
               Email
             </label>
             <input
@@ -99,7 +99,7 @@ const Auth = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              style={{ paddingInline: 6 }}
+              style={{ paddingInline: 16 }}
               className="w-full h-12 px-4 rounded-sm bg-dark3 text-white border-none outline-none text-lg"
               placeholder="john@example.com"
               required
@@ -109,7 +109,7 @@ const Auth = () => {
           <div className="input-group">
             <label
               htmlFor="password"
-              className="block text-sm font-medium mb-1"
+              className="block text-sm font-medium mb-2"
             >
               Password
             </label>
@@ -119,7 +119,7 @@ const Auth = () => {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              style={{ paddingInline: 6 }}
+              style={{ paddingInline: 16 }}
               className="w-full h-12 px-4 rounded-sm bg-dark3 text-white border-none outline-none text-lg"
               placeholder="••••••••"
               required
