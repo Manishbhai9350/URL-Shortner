@@ -11,7 +11,13 @@ import AuthStore from './store'
 
 // Create a client
 const queryClient = new QueryClient()
-const router = createRouter({routeTree})
+const router = createRouter({
+  routeTree,
+  context:{
+    queryClient,
+    AuthStore
+  }
+})
 
 createRoot(document.getElementById('root')).render(
   <Provider store={AuthStore} >

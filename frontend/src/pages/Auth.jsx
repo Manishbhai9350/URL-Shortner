@@ -49,8 +49,7 @@ const Auth = () => {
       if (response.data.success) {
         dispatch(login(response.data.user))
         navigate({to:'/dashboard'})
-        setSuccess('');
-        // You could redirect the user or update app state here
+        setSuccess('')
       }
     } catch (err) {
       setError(
@@ -62,110 +61,184 @@ const Auth = () => {
   };
 
   return (
-    <main className="dark  bg-gradient-bg text-white flex flex-col justify-start items-center h-screen w-screen">
+    <main className="dark px-4 pt-20 bg-gradient-bg text-white flex flex-col justify-start items-center min-h-screen w-screen">
       <GridBackground />
 
-      <div className="headings z-20 relative w-full flex flex-col justify-between items-center mb-8">
-        <h1 className="text-[2.5rem] sm:text-[4rem] lg:text-[4rem] leading-none">
-          {isLogin ? "Welcome Back" : "Join Us Today"}
+      <div
+        className="headings z-20 relative w-full flex flex-col justify-between items-center"
+        style={{ marginBottom: '32px' }}
+      >
+        <h1 className="text-[2.5rem] sm:text-[4rem] lg:text-[4rem] leading-none text-center">
+          {isLogin ? "Welcome Back! 👋" : "Join Us Today! 🚀"}
         </h1>
-        <h2 className="text-[1.5rem] sm:text-[2rem] lg:text-[2rem] leading-none text-blue-400 mt-2">
-          {isLogin ? "Login to your account" : "Create a new account"}
+        <h2
+          className="text-[1.2rem] sm:text-[1.5rem] lg:text-[1.5rem] leading-none text-blue-400 text-center"
+          style={{ marginTop: '16px' }}
+        >
+          {isLogin ? "Login to your account and start shortening" : "Create a new account and get started"}
         </h2>
       </div>
 
-      <div className="auth-form z-20 bg-dark2 relative sm:gap-4 gap-4 flex flex-col w-[95%] sm:w-[80%] md:w-[60%] lg:w-[40%] rounded-md p-6">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <div
+        className="auth-form z-20 bg-dark2/80 backdrop-blur-sm relative flex flex-col w-[95%] sm:w-[80%] md:w-[60%] lg:w-[40%] rounded-xl shadow-2xl border border-dark3/30"
+        style={{
+          gap: '24px',
+          padding: '32px'
+        }}
+      >
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col"
+          style={{ gap: '24px' }}
+        >
           {!isLogin && (
             <div className="input-group">
               <label
                 htmlFor="username"
-                className="block text-sm font-medium mb-2"
+                className="block text-sm font-medium text-gray-300"
+                style={{ marginBottom: '12px' }}
               >
-                Username
+                👤 Username
               </label>
-              <input
-                type="text"
-                id="username"
-                name="username"
-                value={formData.username}
-                onChange={handleChange}
-                style={{ paddingInline: 16 }}
-                className="w-full h-12 px-4 rounded-sm bg-dark3 text-white border-none outline-none text-lg"
-                placeholder="johndoe"
-                required={!isLogin}
-              />
+              <div className="relative">
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleChange}
+                  className="w-full rounded-lg bg-dark3/50 border border-dark3 focus:border-blue-500/50 text-white border-none outline-none text-lg placeholder-gray-400 transition-all duration-200"
+                  style={{
+                    height: '56px',
+                    padding: '0 16px'
+                  }}
+                  placeholder="Enter your username"
+                  required={!isLogin}
+                />
+              </div>
             </div>
           )}
 
           <div className="input-group">
-            <label htmlFor="email" className="block text-sm font-medium mb-2">
-              Email
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-300"
+              style={{ marginBottom: '12px' }}
+            >
+              📧 Email Address
             </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              style={{ paddingInline: 16 }}
-              className="w-full h-12 px-4 rounded-sm bg-dark3 text-white border-none outline-none text-lg"
-              placeholder="john@example.com"
-              required
-            />
+            <div className="relative">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full rounded-lg bg-dark3/50 border border-dark3 focus:border-blue-500/50 text-white border-none outline-none text-lg placeholder-gray-400 transition-all duration-200"
+                style={{
+                  height: '56px',
+                  padding: '0 16px'
+                }}
+                placeholder="Enter your email"
+                required
+              />
+            </div>
           </div>
 
           <div className="input-group">
             <label
               htmlFor="password"
-              className="block text-sm font-medium mb-2"
+              className="block text-sm font-medium text-gray-300"
+              style={{ marginBottom: '12px' }}
             >
-              Password
+              🔒 Password
             </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              style={{ paddingInline: 16 }}
-              className="w-full h-12 px-4 rounded-sm bg-dark3 text-white border-none outline-none text-lg"
-              placeholder="••••••••"
-              required
-            />
+            <div className="relative">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className="w-full rounded-lg bg-dark3/50 border border-dark3 focus:border-blue-500/50 text-white border-none outline-none text-lg placeholder-gray-400 transition-all duration-200"
+                style={{
+                  height: '56px',
+                  padding: '0 16px'
+                }}
+                placeholder="Enter your password"
+                required
+              />
+            </div>
           </div>
 
           {error && (
-            <div className="error-message text-red-500 text-sm mt-2">
-              {error}
+            <div
+              className="error-message bg-red-500/10 border border-red-500/30 text-red-400 rounded-lg text-sm flex items-center"
+              style={{
+                padding: '16px',
+                gap: '12px'
+              }}
+            >
+              <span className="text-lg">⚠️</span>
+              <span>{error}</span>
             </div>
           )}
 
           {success && (
-            <div className="success-message text-green-500 text-sm mt-2">
-              {success}
+            <div
+              className="success-message bg-green-500/10 border border-green-500/30 text-green-400 rounded-lg text-sm flex items-center"
+              style={{
+                padding: '16px',
+                gap: '12px'
+              }}
+            >
+              <span className="text-lg">✅</span>
+              <span>{success}</span>
             </div>
           )}
 
           <button
             type="submit"
             disabled={loading}
-            className={`w-full cursor-pointer h-12 rounded-sm text-lg font-medium transition-colors duration-150 ${
-              loading ? "bg-blue-400" : "bg-blue-500 hover:bg-blue-600"
+            className={`w-full rounded-lg text-lg font-semibold transition-all duration-200 shadow-lg ${
+              loading
+                ? "bg-blue-400 cursor-not-allowed"
+                : "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 hover:shadow-blue-500/25 active:scale-[0.98]"
             }`}
+            style={{ height: '56px' }}
           >
-            {loading ? "Processing..." : isLogin ? "Login" : "Sign Up"}
+            {loading ? (
+              <div
+                className="flex items-center justify-center"
+                style={{ gap: '8px' }}
+              >
+                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                Processing...
+              </div>
+            ) : (
+              <div
+                className="flex items-center justify-center"
+                style={{ gap: '8px' }}
+              >
+                <span>{isLogin ? "🔑" : "🚀"}</span>
+                {isLogin ? "Login to Account" : "Create Account"}
+              </div>
+            )}
           </button>
 
-          <div className="text-center mt-4">
+          <div
+            className="text-center"
+            style={{ marginTop: '24px' }}
+          >
             <button
               type="button"
               onClick={toggleMode}
-              className="text-blue-400 hover:text-blue-300 text-sm transition-colors"
+              className="text-blue-400 hover:text-blue-300 text-sm transition-colors font-medium rounded-lg hover:bg-blue-500/10"
+              style={{ padding: '12px 16px' }}
             >
               {isLogin
-                ? "Don't have an account? Sign up"
-                : "Already have an account? Login"}
+                ? "Don't have an account? Sign up here 👆"
+                : "Already have an account? Login here 👆"}
             </button>
           </div>
         </form>

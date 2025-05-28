@@ -7,8 +7,6 @@
 }
 
 
-@custom-variant dark (&:where(.dark,.dark *));
-
 *{ 
 padding:0; 
 margin:0;
@@ -23,7 +21,7 @@ overflow: hidden;
 main {
     width: 100svw;
     height: 100svh;
-    overflow: hidden;
+    overflow-x: hidden;
     padding-top: 70px;
     gap: 15px;
 }

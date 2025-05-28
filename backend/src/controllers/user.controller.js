@@ -41,6 +41,14 @@ export const LoginUserController = async (req,res) => {
 
 }
 
+export const GetUser = async (req,res) => {
+    console.log(req.user)
+    return res.status(200).json({
+        success:true,
+        user:req.user
+    })
+}
+
 
 export const LogOutController = async (req, res) => {
   res.cookie('access-token', '',cookieOptions).status(200).json({ message: 'Logged out successfully',success:true });
