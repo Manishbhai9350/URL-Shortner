@@ -15,7 +15,7 @@ const router = createRouter({
   routeTree,
   context:{
     queryClient,
-    AuthStore
+    AuthStore,
   }
 })
 

@@ -3,6 +3,7 @@ import WrappAsync from "../utils/WrappAsync.js"
 import {signToken} from '../utils/jwt.util.js'
 import {Hash} from '../utils/bcrypt.util.js'
 import { cookieOptions } from "../config/cookie.config.js"
+import UrlModel from "../models/url.model.js"
 
 export const RegisterUserController = WrappAsync(async (req,res) => {
     const {email,password,username} = req.body
@@ -42,10 +43,14 @@ export const LoginUserController = async (req,res) => {
 }
 
 export const GetUser = async (req,res) => {
-    console.log(req.user)
+    const {username,email,_id} = req.user;
     return res.status(200).json({
         success:true,
-        user:req.user
+        user:{
+            username,
+            email,
+            _id
+        }
     })
 }
 

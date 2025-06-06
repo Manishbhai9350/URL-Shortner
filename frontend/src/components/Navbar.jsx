@@ -1,19 +1,25 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useNavigate } from '@tanstack/react-router'
+import { useQueryClient } from '@tanstack/react-query';
 import { logout } from '../store/slices/auth.slice'
 import AxiosUtil from '../utils/axios.util'
 import { FaUser, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa'
+import { setUrlData } from '../store/slices/url.slice'
 
 const Navbar = () => {
   const { isAuthenticated, user } = useSelector(state => state.auth)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  const queryClient = useQueryClient()
+
   const handleLogout = async () => {
     try {
       await AxiosUtil.get('/auth/logout')
+      await queryClient.removeQueries(['current-user'])
       dispatch(logout())
+      dispatch(setUrlData({userId:null,urls:[]}))
       navigate({ to: '/' })
     } catch (error) {
       console.error('Logout failed:', error)
@@ -21,12 +27,12 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-dark2/95 backdrop-blur-sm border-b border-dark3/50">
+    <nav style={{paddingInline:10}} className="fixed px-2 top-0 left-0 right-0 z-50 bg-dark2/95 backdrop-blur-sm border-b border-dark3/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center group">
-            <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent group-hover:from-blue-300 group-hover:to-blue-500 transition-all duration-300">
+            <span className="text-sm sm:text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent group-hover:from-blue-300 group-hover:to-blue-500 transition-all duration-300">
               URL Shortener
             </span>
           </Link>
@@ -36,7 +42,7 @@ const Navbar = () => {
             {isAuthenticated ? (
               <div className="flex items-center space-x-4">
                 {/* User Info */}
-                <div
+                {/* <div
                   className="flex items-center bg-dark3/50 rounded-lg"
                   style={{
                     gap: '12px',
@@ -49,7 +55,7 @@ const Navbar = () => {
                   <span className="text-white text-sm font-medium hidden sm:block">
                     {user?.username || user?.email?.split('@')[0]}
                   </span>
-                </div>
+                </div> */}
 
                 {/* Dashboard Link */}
                 <Link

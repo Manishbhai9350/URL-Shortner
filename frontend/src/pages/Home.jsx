@@ -1,13 +1,9 @@
 import GridBackground from "./../components/GridBackground";
 import UrlForm from "./../components/UrlForm";
-import useWindow from "./../hooks/useWindow";
-import { useEffect, useState } from "react";
-import Auth from "./Auth";
+import { useState } from "react";
 
 function Home() {
-
-  const {width,height} = useWindow()
-
+  
   const [Data, setData] = useState({
     fullUrl:'',
     shortUrl:'',

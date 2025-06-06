@@ -13,6 +13,8 @@ export const SaveShortUrl = async (full,short,userId) => {
     if(userId) {
       ShortUrl.user = userId
     }
+    console.log(userId)
+    console.log(ShortUrl)
     await ShortUrl.save();
     return ShortUrl
   } catch (error) {
@@ -31,6 +33,10 @@ export const GetUrlFromShort = async (short) => {
   }
 }
 
+export const GetUrlsFromId = async (id) => {
+  const Urls = await UrlModel.find({user:id})
+  return Urls;
+}
 
 
 export const RegisterUser = async ({username,email,password}) => {

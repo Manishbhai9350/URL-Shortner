@@ -9,6 +9,7 @@ import { GenerateUrl } from "../utils/helper.util.js";
 export const CreateShortUrl = async (full) => {
     const short = GenerateUrl();
     const ShortUrl = await SaveShortUrl(full,short)
+    console.log(ShortUrl)
     return ShortUrl
 }
 
@@ -42,7 +43,7 @@ export const CreateCustomUrl = async ({url,slug,userId}) => {
   const Exist = await UrlModel.findOne({short:slug})
   if(Exist) throw new ConflictError('Short Url Already Exist')
   
-  const ShortUrl = await SaveShortUrl(url,slug)
+  const ShortUrl = await SaveShortUrl(url,slug,userId)
 
   return ShortUrl
 }
